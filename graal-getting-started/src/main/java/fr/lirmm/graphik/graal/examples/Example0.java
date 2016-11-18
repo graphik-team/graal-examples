@@ -72,6 +72,7 @@ import fr.lirmm.graphik.graal.homomorphism.StaticHomomorphism;
 import fr.lirmm.graphik.graal.io.dlp.DlgpParser;
 import fr.lirmm.graphik.graal.io.dlp.DlgpWriter;
 import fr.lirmm.graphik.util.stream.CloseableIterator;
+import fr.lirmm.graphik.util.stream.CloseableIteratorWithoutException;
 
 public class Example0 {
 
@@ -137,8 +138,8 @@ public class Example0 {
 		// 7 - Rewrite the original query (backward chaining) in an union of
 		// queries
 		QueryRewriter rewriter = new PureRewriter();
-		UnionOfConjunctiveQueries ucq = new DefaultUnionOfConjunctiveQueries(query.getAnswerVariables(),
-		                                                                   rewriter.execute(query, ontology));
+		CloseableIteratorWithoutException<ConjunctiveQuery> it = rewriter.execute(query, ontology);
+		UnionOfConjunctiveQueries ucq = new DefaultUnionOfConjunctiveQueries(query.getAnswerVariables(), it);
 
 		// Print the set of facts in Dlgp
 		writer.write("\n= Facts =\n");
