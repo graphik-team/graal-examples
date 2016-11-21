@@ -99,7 +99,7 @@ public class NaturalRdbmsExample {
 		writer.flush();
 
 		writer.write("\n= Query =\n");
-		ConjunctiveQuery query = DlgpParser.parseQuery("?(X,Y) :- has_part(Y,X), skeleton(X).");
+		ConjunctiveQuery query = DlgpParser.parseQuery("?(X) :- mammal(X).");
 		writer.write(query);
 
 		writer.write("\n= Answers =\n");
