@@ -11,6 +11,7 @@ import fr.lirmm.graphik.graal.api.core.Substitution;
 import fr.lirmm.graphik.graal.api.io.Parser;
 import fr.lirmm.graphik.graal.api.kb.KnowledgeBase;
 import fr.lirmm.graphik.graal.api.kb.KnowledgeBaseException;
+import fr.lirmm.graphik.graal.api.kb.Priority;
 import fr.lirmm.graphik.graal.core.stream.filter.AtomFilterIterator;
 import fr.lirmm.graphik.graal.io.dlp.DlgpParser;
 import fr.lirmm.graphik.graal.io.dlp.DlgpWriter;
@@ -69,39 +70,46 @@ import fr.lirmm.graphik.util.stream.CloseableIterator;
  */
 public class NaturalRdbmsExample {
 
+	private static final String dbFilepath = "./src/main/resources/animals.db";
+	private static final String dlpFilepath = "./src/main/resources/animals.dlp";
 	private static Scanner scan = new Scanner(System.in);
 	private static DlgpWriter writer;
-
-	public static void init() throws AtomSetException, SQLException, FileNotFoundException {
-		NaturalRDBMSStore naturalRDBMSStore = new NaturalRDBMSStore(new SqliteDriver("./src/main/resources/animals.db"));
-		Parser<Object> parser = new DlgpParser(new File("./src/main/resources/animals.dlp"));
-		naturalRDBMSStore.addAll(new AtomFilterIterator(parser));
-		naturalRDBMSStore.close();
-	}
 
 	public static void main(String args[])
 	    throws KBBuilderException, AtomSetException, SQLException, IOException, KnowledgeBaseException {
 
-		// init();
-
+		// 0 - initialize the database if needed
+		if(!new File(dbFilepath).exists()) {
+			init();
+		}
+		
+		// 1 - create a KBBuilder
 		KBBuilder kbb = new KBBuilder();
-		kbb.setStore(new NaturalRDBMSStore(new SqliteDriver("./src/main/resources/animals.db")));
-		kbb.addRules(new DlgpParser(new File("./src/main/resources/animals.dlp")));
+		// 2 - set the connection to the database
+		kbb.setStore(new NaturalRDBMSStore(new SqliteDriver(dbFilepath)));
+		// 3 - set the ontology
+		kbb.addRules(new DlgpParser(new File(dlpFilepath)));
+		// 4 - set the privileged mechanism
+		kbb.setPriority(Priority.REWRITING);
+		// 5 - build the KB
 		KnowledgeBase kb = kbb.build();
 
 		writer = new DlgpWriter();
 
+		// 6 - print the ontology
 		writer.write("\n= Ontology =\n");
 		writer.write(kb.getOntology());
 
+		// 7 - print the facts
 		writer.write("\n= Facts =\n");
 		writer.write(kb.getFacts());
-		writer.flush();
 
-		writer.write("\n= Query =\n");
+		// 8 - parse and print a query
 		ConjunctiveQuery query = DlgpParser.parseQuery("?(X) :- mammal(X).");
+		writer.write("\n= Query =\n");
 		writer.write(query);
 
+		// 8 - query the KB and print answers
 		writer.write("\n= Answers =\n");
 		CloseableIterator<Substitution> results = kb.query(query);
 		if (results.hasNext()) {
@@ -110,18 +118,20 @@ public class NaturalRdbmsExample {
 				writer.write("\n");
 			}
 		} else {
-			writer.write("Nok\n");
+			writer.write("No answer.\n");
 		}
-
+		
+		// 9 - close resources
 		results.close();
 		writer.close();
 		kb.close();
 	}
 
-	private static void waitEntry() throws IOException {
-		writer.write("\n");
-		writer.flush();
-		scan.nextLine();
+	public static void init() throws AtomSetException, SQLException, FileNotFoundException {
+		NaturalRDBMSStore naturalRDBMSStore = new NaturalRDBMSStore(new SqliteDriver(dbFilepath));
+		Parser<Object> parser = new DlgpParser(new File(dlpFilepath));
+		naturalRDBMSStore.addAll(new AtomFilterIterator(parser));
+		naturalRDBMSStore.close();
 	}
 
 }
