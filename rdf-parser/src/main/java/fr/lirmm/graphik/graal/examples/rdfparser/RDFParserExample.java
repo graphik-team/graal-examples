@@ -63,14 +63,14 @@ public class RDFParserExample {
 	public static void main(String args[]) throws
 			IOException {
 
-		// 0 - Create a DLGP writer to print parsed ontology
+		// 0 - Create a DLGP writer to print parsed facts
 		DlgpWriter writer = new DlgpWriter();
 		
 		// 1 - Create a RDF parser for the specified rdf file
 		File f = new File("./src/main/resources/ms_7.4_3.rdf");
 		RDFParser parser = new RDFParser(new FileReader(f), RDFFormat.RDFXML);
 		
-		// 2 - Parse the file and display the ontology
+		// 2 - Parse the file and display the facts
 		while (parser.hasNext()) {
 			Object o = parser.next();
 			writer.write(o);
