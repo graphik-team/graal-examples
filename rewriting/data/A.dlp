@@ -1,0 +1,128 @@
+@prefix : <http://ksg.meraka.co.za/adolena.owl#>
+@prefix dc: <http://purl.org/dc/elements/1.1/>
+@prefix NAP: <file:///home/aurona/0AlleWerk/Navorsing/Ontologies/NAP/NAP#>
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+@prefix owl2: <http://www.w3.org/2006/12/owl2#>
+@prefix owl2xml: <http://www.w3.org/2006/12/owl2-xml#>
+@top top
+NAP:Manual_Wheelchair(X0) :- NAP:Foldable_Wheelchair(X0).
+NAP:PhysicalDisability(X0) :- NAP:Muscular_dystrophy(X0).
+NAP:SightAbility(X0) :- NAP:See(X0).
+NAP:Communication_Device(X0) :- :ListenDevice(X0).
+NAP:HearingDisability(X0) :- NAP:Hard_of_hearing(X0).
+:assistsWith(X0, X3), NAP:MovementAbility(X3) :- NAP:MobilityDevice(X0).
+NAP:PhysicalDisability(X0) :- NAP:Kyphosis(X0).
+NAP:PhysicalDisability(X0) :- NAP:Scoliosis(X0).
+NAP:HearingAbility(X0) :- NAP:Hear_partially(X0).
+:TactileReading(X0) :- :BrailleWatch(X0).
+NAP:MentalDisability(X0) :- NAP:Autism(X0).
+:ReadingDevice(X0) :- :TactileReading(X0).
+NAP:SpeechDisability(X0) :- NAP:Little_or_No_Speech(X0).
+NAP:requiresAbility(X0, X3), NAP:UpperLimbMobility(X3) :- NAP:Manual_Wheelchair(X0).
+NAP:Ability(X0) :- NAP:SpeechAbility(X0).
+NAP:AssistiveDevice(X0) :- NAP:MobilityDevice(X0).
+:assistsWith(X0, X3), NAP:Ability(X3) :- NAP:AssistiveDevice(X0).
+:assistsWith(X0, X3), NAP:LimbMobility(X3) :- NAP:Wheelchair(X0).
+NAP:LimbMobility(X0) :- NAP:LowerLimbMobility(X0).
+:affects(X0, X3), NAP:SpeechAbility(X3) :- NAP:Little_or_No_Speech(X0).
+NAP:PhysicalAbility(X0) :- NAP:MovementAbility(X0).
+:SpeechDevice(X0) :- NAP:TelephoneAid(X0).
+:assistsWith(X0, X3), NAP:LowerLimbMobility(X3) :- NAP:Motorised_Wheelchair(X0).
+NAP:Foldable_Wheelchair(X0) :- NAP:LightweightFoldable_Wheelchair(X0).
+NAP:HearingDisability(X0) :- NAP:Deafened(X0).
+:ReadingDevice(X0) :- :TalkingReading(X0).
+NAP:PhysicalDisability(X0) :- NAP:Cerebral_palsy(X0).
+:affects(X0, X3), NAP:Ability(X3) :- NAP:Disability(X0).
+NAP:Disability(X0) :- NAP:MentalDisability(X0).
+:assistsWith(X0, X3), NAP:SpeechAbility(X3) :- :SpeechDevice(X0).
+NAP:SensoryAbility(X0) :- NAP:TactileAbility(X0).
+NAP:PhysicalDisability(X0) :- NAP:Multiple_sclerosis(X0).
+NAP:PhysicalDisability(X0) :- NAP:Osteogensis_Imperfecta(X0).
+NAP:MentalDisability(X0) :- NAP:Epilepsy(X0).
+NAP:Disability(X0) :- NAP:SpeechDisability(X0).
+NAP:HearingAbility(X0) :- NAP:Hear(X0).
+:assistsWith(X0, X3), NAP:SightAbility(X3) :- :TactileReading(X0).
+NAP:Communication_Device(X0) :- :SpeechDevice(X0).
+NAP:PhysicalDisability(X0) :- NAP:Hemiplegia(X0).
+NAP:AssistiveDevice(X0) :- NAP:Communication_Device(X0).
+NAP:Communication_Device(X0) :- :ReadingDevice(X0).
+NAP:Manual_Wheelchair(X0) :- NAP:Lightweight_Wheelchair(X0).
+NAP:MovementAbility(X0) :- NAP:Reach(X0).
+NAP:PhysicalDisability(X0) :- NAP:Quadriplegia(X0).
+NAP:Wheelchair(X0) :- NAP:Manual_Wheelchair(X0).
+:WritingDevice(X0) :- :BrailleWritingDevice(X0).
+NAP:Lightweight_Wheelchair(X0) :- NAP:LightweightFoldable_Wheelchair(X0).
+NAP:Motorised_Wheelchair(X0) :- NAP:BatteryPowered_Wheelchair(X0).
+NAP:SensoryAbility(X0) :- NAP:HearingAbility(X0).
+NAP:Ability(X0) :- NAP:PhysicalAbility(X0).
+:assistsWith(X0, X3), NAP:HearingAbility(X3) :- :ListenDevice(X0).
+NAP:MentalDisability(X0) :- NAP:IntellectualDisability(X0).
+NAP:Disability(X0) :- NAP:PhysicalDisability(X0).
+NAP:HearingDisability(X0) :- NAP:Deaf(X0).
+:assistsWith(X0, X3), NAP:LowerLimbMobility(X3) :- NAP:Manual_Wheelchair(X0).
+:assistsWith(X0, X3), NAP:SightAbility(X3) :- :BrailleWritingDevice(X0).
+NAP:PhysicalDisability(X0) :- NAP:Paraplegia(X0).
+NAP:Disability(X0) :- NAP:HearingDisability(X0).
+:affects(X0, X3), NAP:HearingAbility(X3) :- NAP:HearingDisability(X0).
+:assistsWith(X0, X3), NAP:SightAbility(X3) :- :ReadingDevice(X0).
+NAP:isAssistedBy(X0, X3), NAP:Device(X3) :- NAP:Ability(X0).
+:affects(X0, X3), NAP:LowerLimbMobility(X3) :- NAP:Quadriplegia(X0).
+NAP:PhysicalDisability(X0) :- NAP:Achondroplasia(X0).
+NAP:isAffectedBy(X0, X3), NAP:Disability(X3) :- NAP:Ability(X0).
+:assistsWith(X0, X3), NAP:UpperLimbMobility(X3) :- NAP:Motorised_Wheelchair(X0).
+:affects(X0, X3), NAP:SpeechAbility(X3) :- NAP:Deaf(X0).
+NAP:MobilityDevice(X0) :- NAP:Wheelchair(X0).
+NAP:SightAbility(X0) :- NAP:See_partially(X0).
+NAP:MovementAbility(X0) :- NAP:LimbMobility(X0).
+NAP:PhysicalDisability(X0) :- NAP:Dystonia(X0).
+:affects(X0, X3), NAP:UpperLimbMobility(X3) :- NAP:Quadriplegia(X0).
+NAP:PhysicalDisability(X0) :- NAP:Guillaume_Barre(X0).
+:TalkingReading(X0) :- NAP:Talking_Thermometer(X0).
+NAP:FaceToFaceCommunicationDevice(X0) :- NAP:SymbolBoard(X0).
+NAP:PhysicalDisability(X0) :- NAP:Spina_Bifida(X0).
+NAP:VisualDisability(X0) :- NAP:Blind(X0).
+:ListenDevice(X0) :- NAP:TelephoneAid(X0).
+NAP:PhysicalDisability(X0) :- NAP:Amputation(X0).
+:affects(X0, X3), NAP:LowerLimbMobility(X3) :- NAP:Paraplegia(X0).
+NAP:Wheelchair(X0) :- NAP:Motorised_Wheelchair(X0).
+NAP:requiresAbility(X0, X3), NAP:HearingAbility(X3) :- :TalkingReading(X0).
+NAP:LimbMobility(X0) :- NAP:UpperLimbMobility(X0).
+:TactileReading(X0) :- :BraillePillOrganiser(X0).
+NAP:Communication_Device(X0) :- :WritingDevice(X0).
+NAP:PhysicalDisability(X0) :- NAP:Poliomyelitis(X0).
+NAP:requiresAbility(X0, X3), NAP:TactileAbility(X3) :- :TactileReading(X0).
+NAP:SpeechDisability(X0) :- NAP:Stuttering(X0).
+NAP:SensoryAbility(X0) :- NAP:SightAbility(X0).
+NAP:Disability(X0) :- NAP:VisualDisability(X0).
+NAP:VisualDisability(X0) :- NAP:LowVision(X0).
+NAP:Communication_Device(X0) :- NAP:FaceToFaceCommunicationDevice(X0).
+:assistsWith(X0, X3), NAP:SightAbility(X3) :- :TalkingReading(X0).
+:TactileReading(X0) :- :BrailleAlarmClock(X0).
+NAP:Device(X0) :- NAP:AssistiveDevice(X0).
+NAP:Ability(X0) :- NAP:SensoryAbility(X0).
+:affects(X0, X3), NAP:PhysicalAbility(X3) :- NAP:PhysicalDisability(X0).
+:assistsWith(X0, X3), NAP:SpeechAbility(X3) :- NAP:FaceToFaceCommunicationDevice(X0).
+NAP:FaceToFaceCommunicationDevice(X0) :- NAP:FaceToFaceCommunicationSoftware(X0).
+! :- NAP:Manual_Wheelchair(X0), NAP:Motorised_Wheelchair(X0).
+! :- NAP:PhysicalDisability(X0), NAP:VisualDisability(X0).
+! :- NAP:MentalDisability(X0), NAP:PhysicalDisability(X0).
+! :- NAP:HearingDisability(X0), NAP:VisualDisability(X0).
+! :- NAP:HearingDisability(X0), NAP:PhysicalDisability(X0).
+! :- NAP:Ability(X0), NAP:Disability(X0).
+! :- NAP:PhysicalAbility(X0), NAP:SensoryAbility(X0).
+! :- NAP:LowerLimbMobility(X0), NAP:UpperLimbMobility(X0).
+! :- NAP:MentalDisability(X0), NAP:SpeechDisability(X0).
+! :- NAP:HearingDisability(X0), NAP:MentalDisability(X0).
+! :- NAP:PhysicalAbility(X0), NAP:SpeechAbility(X0).
+! :- NAP:SpeechDisability(X0), NAP:VisualDisability(X0).
+! :- NAP:MentalDisability(X0), NAP:VisualDisability(X0).
+! :- NAP:Communication_Device(X0), NAP:MobilityDevice(X0).
+! :- NAP:Device(X0), NAP:Disability(X0).
+! :- NAP:SensoryAbility(X0), NAP:SpeechAbility(X0).
+! :- NAP:PhysicalDisability(X0), NAP:SpeechDisability(X0).
+! :- NAP:Ability(X0), NAP:Device(X0).
+! :- NAP:HearingDisability(X0), NAP:SpeechDisability(X0).
+:assistsWith(X1, X0) :- NAP:isAssistedBy(X0, X1).
+NAP:isAssistedBy(X0, X1) :- :assistsWith(X1, X0).
+:affects(X1, X0) :- NAP:isAffectedBy(X0, X1).
+NAP:isAffectedBy(X0, X1) :- :affects(X1, X0).

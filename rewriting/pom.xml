@@ -2,53 +2,36 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>fr.lirmm.graphik</groupId>
-	<artifactId>rewriting-example</artifactId>
-	<version>1.0</version>
+	<parent>
+		<groupId>fr.lirmm.graphik</groupId>
+		<artifactId>graal-examples</artifactId>
+		<version>1.3.0-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>graal-rewriting-example</artifactId>
 	<packaging>jar</packaging>
-	<name>rewriting-example</name>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jdk.version>1.7</jdk.version>
-		<graal.version>1.3.0-SNAPSHOT</graal.version>
-	</properties>
+	<name>fr.lirmm.graphik:graal-rewriting-example</name>
 
 	<dependencies>
 		<dependency>
 			<groupId>fr.lirmm.graphik</groupId>
 			<artifactId>graal-io-dlgp</artifactId>
-			<version>${graal.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>fr.lirmm.graphik</groupId>
 			<artifactId>graal-backward-chaining</artifactId>
-			<version>${graal.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.1.3</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
-				</configuration>
-			</plugin>
-
 			<!-- Maven Shade Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.3</version>
+				<version>3.0.0</version>
 				<executions>
 					<!-- Run shade goal on package phase -->
 					<execution>
@@ -61,14 +44,14 @@
 								<!-- add Main-Class to manifest file -->
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>fr.lirmm.graphik.graal.examples.rewriting.RewritingExample</mainClass>
+									<mainClass>fr.lirmm.graphik.graal.examples.rewriting.Rewriting</mainClass>
 								</transformer>
 							</transformers>
+							<minimizeJar>true</minimizeJar>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-
 		</plugins>
 	</build>
 
