@@ -51,6 +51,7 @@ import java.util.Scanner;
 
 import fr.lirmm.graphik.graal.api.core.ConjunctiveQuery;
 import fr.lirmm.graphik.graal.api.core.Substitution;
+import fr.lirmm.graphik.graal.api.kb.Approach;
 import fr.lirmm.graphik.graal.api.kb.KnowledgeBase;
 import fr.lirmm.graphik.graal.api.kb.KnowledgeBaseException;
 import fr.lirmm.graphik.graal.io.dlp.DlgpParser;
@@ -77,6 +78,9 @@ public class GettingStarted {
 
 		// 1 - Load an ontology and data from a DLGP file
 		kbb.addAll(new DlgpParser(new File(rootDir, "animals.dlp")));
+		
+		// ? - Here you can define your prefered approach to solve queries
+		kbb.setApproach(Approach.REWRITING_FIRST);
 
 		// 2 - Generate the KnowledgeBase
 		KnowledgeBase kb = kbb.build();
@@ -93,7 +97,7 @@ public class GettingStarted {
 		writer.write(kb.getFacts());
 
 		// 6 - Parse a query from a Java String and print it
-		ConjunctiveQuery query = DlgpParser.parseQuery("?(X) :- mammal(X).");
+		ConjunctiveQuery query = DlgpParser.parseQuery("?(X,Y) :- has_predator(X,Y), mammal(Y).");
 		writer.write("\n= Query =\n");
 		writer.write(query);
 
