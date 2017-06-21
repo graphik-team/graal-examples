@@ -67,7 +67,7 @@ import fr.lirmm.graphik.graal.backward_chaining.pure.PureRewriter;
 import fr.lirmm.graphik.graal.core.DefaultUnionOfConjunctiveQueries;
 import fr.lirmm.graphik.graal.core.atomset.graph.DefaultInMemoryGraphStore;
 import fr.lirmm.graphik.graal.core.ruleset.LinkedListRuleSet;
-import fr.lirmm.graphik.graal.forward_chaining.DefaultChase;
+import fr.lirmm.graphik.graal.forward_chaining.BreadthFirstChase;
 import fr.lirmm.graphik.graal.homomorphism.StaticHomomorphism;
 import fr.lirmm.graphik.graal.io.dlp.DlgpParser;
 import fr.lirmm.graphik.graal.io.dlp.DlgpWriter;
@@ -163,7 +163,7 @@ public class Example0 {
 		writer.write("=========================================\n");
 
 		// 8 - Apply a naive chase (forward chaining) on data
-		Chase chase = new DefaultChase(ontology, store);
+		Chase chase = new BreadthFirstChase(ontology, store);
 		chase.execute();
 
 		writer.write("\n= Query =\n");

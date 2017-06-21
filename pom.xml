@@ -4,7 +4,7 @@
 
 	<groupId>fr.lirmm.graphik</groupId>
 	<artifactId>graal-examples</artifactId>
-	<version>1.3.0-SNAPSHOT</version>
+	<version>1.3.rc1</version>
 	<name>fr.lirmm.graphik:graal-examples</name>
 	<packaging>pom</packaging>
 
@@ -46,6 +46,7 @@
 
 	<modules>
 		<module>getting-started</module>
+    <module>homomorphism-with-compilation</module>
 		<module>relational-database</module>
     <module>rewriting</module>
     <module>owl-parser</module>
