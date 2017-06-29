@@ -1,7 +1,7 @@
 #!/bin/sh
 
 cd $1
-mvn clean package
+mvn -q clean package
 cd -
 
 rm -rf /tmp/graal-$1-example/
