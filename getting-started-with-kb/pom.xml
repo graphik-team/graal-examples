@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>fr.lirmm.graphik</groupId>
-	<version>1.3.0-SNAPSHOT</version>
+	<version>1.3.0</version>
 	<artifactId>getting-started-with-kb-example</artifactId>
 	<packaging>jar</packaging>
 	<name>fr.lirmm.graphik:getting-started-with-kb-example</name>
