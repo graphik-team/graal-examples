@@ -1,11 +1,11 @@
 #!/bin/sh
 
 cd $1
-mvn clean
+mvn -q clean
 cd -
 zip graal-$1-maven-example.zip $1/*
 cd $1
-mvn package
+mvn -q package
 cd -
 
 $tmpdir=$(mktemp)

@@ -1,0 +1,35 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hierarchy
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+is_a(X,animal) :- is_a(X,vertebrate).
+is_a(X,vertebrate) :- is_a(X, osteichthyen).
+
+is_a(X, osteichthyen) :- is_a(X,mammal).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Rules
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+is_a(X,vertebrate) :- is_a(X,animal), has_part(X,Y), is_a(Y,skeleton).
+has_part(X,Y), is_a(Y,skeleton) :- is_a(X,vertebrate).
+
+is_a(X, osteichthyen) :- is_a(X, animal), has_part(X, bone_skeleton).
+has_part(X, bone_skeleton) :- is_a(X, osteichthyen).
+
+is_a(X,chondrichthyen) :- is_a(X,animal), has_part(X, cartilage_skeleton).
+has_part(X, cartilage_skeleton) :- is_a(X,chondrichthyen).
+
+is_a(X,mammal) :- is_a(X,animal), has_part(X, hair).
+is_a(X,mammal) :- is_a(X,animal), has_part(X, mammals).
+has_part(X, hair),has_part(X, mammals) :- is_a(X,mammal).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Facts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+is_a(bone_skeleton, skeleton), 
+is_a(cartilage_skeleton, skeleton).
+
+is_a(mice, animal), has_part(mice, hair).
